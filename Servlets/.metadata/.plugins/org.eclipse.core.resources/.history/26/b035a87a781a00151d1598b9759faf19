@@ -1,0 +1,4 @@
+DRIVER=oracle.jdbc.driver.OracleDriver
+HOST = jdbc:oracle:thin:@localhost:1521:xe
+USER=HR
+PASSWORD=hr

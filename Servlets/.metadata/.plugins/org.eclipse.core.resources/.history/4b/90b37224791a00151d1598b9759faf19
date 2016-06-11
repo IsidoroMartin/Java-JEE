@@ -1,0 +1,21 @@
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class AuthServlet extends HttpServlet{
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String user = null,pass=null;
+		
+		if(((user = req.getParameter("User"))!= null) && (user = req.getParameter("Pass"))!= null)){
+			
+		}
+		
+	}
+}

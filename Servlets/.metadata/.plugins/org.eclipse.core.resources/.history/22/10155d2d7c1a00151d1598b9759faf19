@@ -1,0 +1,14 @@
+package model.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import model.dtos.Employee;
+
+public class AuthDAO {
+	public boolean autenticarUsuario(String user , String pass){
+
+		return e;
+	}
+}

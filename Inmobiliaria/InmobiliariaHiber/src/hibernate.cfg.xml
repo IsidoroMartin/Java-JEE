@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+		<property name="hibernate.connection.password">hr</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+		<property name="hibernate.connection.username">HR</property>
+		<property name="hibernate.default_schema">HR</property>
+		<property name="show_sql">true</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="connection.pool_size">1</property>
+
+
+		<mapping resource="model/persistencia/dao/hibernate/mapping_files/DetalleInmueble.hbm.xml" />
+		<mapping resource="model/persistencia/dao/hibernate/mapping_files/Estado.hbm.xml" />
+		<mapping resource="model/persistencia/dao/hibernate/mapping_files/FotosDetalleInmueble.hbm.xml" />
+		<mapping resource="model/persistencia/dao/hibernate/mapping_files/FotosInmueble.hbm.xml" />
+		<mapping resource="model/persistencia/dao/hibernate/mapping_files/Inmueble.hbm.xml" />
+		<mapping resource="model/persistencia/dao/hibernate/mapping_files/TipoUsuario.hbm.xml" />
+		<mapping resource="model/persistencia/dao/hibernate/mapping_files/Usuarios.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

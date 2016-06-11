@@ -1,0 +1,43 @@
+package servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import model.dtos.Department;
+import model.services.DepartamentosService;
+
+public class ServletInit extends HttpServlet {
+	private Logger log = LogManager.getRootLogger();
+	private int nveces = 0;
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		nveces++;
+		resp.setContentType("text/html");
+		PrintWriter out = resp.getWriter();
+		
+		DepartamentosService ds = new DepartamentosService();
+		ArrayList<Department> departamentos = (ArrayList<Department>) ds
+				.getDepartments();
+		Iterator<Department> it = departamentos.iterator();
+		out.println("<select>");
+		while (it.hasNext()) {
+			out.println("<option>" + it.next().getDepartmentName() +"</option>");
+		}
+		out.println("</select>");
+		req.getRequestDispatcher("/ServletResult").include(req, resp);
+		log.info(nveces);
+//		resp.sendRedirect("http://www.google.es");
+	}
+}

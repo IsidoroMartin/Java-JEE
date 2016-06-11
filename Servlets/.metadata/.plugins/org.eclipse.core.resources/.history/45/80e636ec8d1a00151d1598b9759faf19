@@ -1,0 +1,25 @@
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.services.AuthService;
+
+public class AuthServlet extends HttpServlet{
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String user = null,pass=null;
+		boolean valido=false;
+		if(((user = req.getParameter("usuario"))!= null) && ((pass = req.getParameter("pass"))!= null)){
+		AuthService as = new AuthService();	
+		 = as.autenticarUsuario(user, pass);
+		resp.getWriter().println("Bienvenido "+user);
+		}
+		
+	}
+}

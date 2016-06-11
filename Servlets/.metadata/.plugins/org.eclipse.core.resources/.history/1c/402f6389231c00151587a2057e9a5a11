@@ -1,0 +1,69 @@
+package filters;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+
+
+
+public class PrevSQLInjeccFilter implements Filter {
+
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+		String user = null, pass = null;
+		boolean valido = false;
+		if (((user = req.getParameter("usuario")) != null)
+				&& ((pass = req.getParameter("pass")) != null) && validar(user) && validar(pass) ) {
+			chain.doFilter(req, resp);
+		}else{
+			((HttpServletResponse)resp).sendRedirect("LoginServlet");
+		}
+		System.out.println("HOLABLABLABLA");
+		
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+public boolean validar(String password){
+	byte i = 0;
+	boolean valido = true;
+	byte longitud = (byte) password.length();
+	do {
+		Character c = password.charAt(i);
+		switch (c) {
+		case '*':
+		case '\'':
+		case '\\':
+		case '/':
+		case '-':
+		case '+':
+		case '&':
+		case '%':
+		case '$':
+		case '!':
+		case '¡':
+			valido = false;
+			break;
+		}
+		i++;
+	} while ((valido) && (i < longitud));
+	return valido;
+}
+
+}

@@ -1,0 +1,5 @@
+package config.copy;
+
+public class ConfigFiles {
+	public static final String DBJDBCPROPERTIES = "src/config/dbjdbc.properties";
+}

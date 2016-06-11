@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Obtener employee</title>
+<script type="text/javascript">
+	var xmlHttp = null;
+	function obtenerEmployee() {
+		var emp_id = document.getElementById("dep_id_txt").value;
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.onreadystatechange = procesarMensajeHttp;
+		xmlHttp
+				.open(
+						"GET",
+						"http://localhost:8090/EliminarDepartamentoRest/rest/employeeResource/obtenerEmployee/"
+								+ emp_id, true);
+		xmlHttp.send(null);
+	}
+	function procesarMensajeHttp() {
+		if (xmlHttp.readyState == 4) {
+			if (xmlHttp.status == 200) {
+				var empleado = JSON.parse(xmlHttp.responseText);
+				document.getElementById("detalles_empleado").innerHTML = "Nombre: "
+						+ empleado.firstName
+						+ ", Apellido: "
+						+ empleado.lastName + ", Salary: " + empleado.salary;
+
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="dep_id_txt"
+		placeholder="Introduce el Id de el empleado" />
+	<input type="button" onclick="obtenerEmployee();"
+		value="Obtener Employee">
+	<div id="detalles_empleado"></div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+package controller;
+
+import java.io.IOException;
+import java.net.CookieHandler;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.CookiesHandler;
+import model.services.AuthService;
+
+public class AuthServlet extends HttpServlet {
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		int nveces = 0;
+		Cookie cookieNveces = null;
+		if (null == (cookieNveces = CookiesHandler.getCookie("nveces",
+				req.getCookies()))) {
+			resp.addCookie(new Cookie("nveces", "0"));
+		} else {
+			nveces = Integer.parseInt(cookieNveces.getValue())
+			resp.addCookie(new Cookie("nveces", String.valueOf(Integer
+					.parseInt(cookieNveces.getValue() + 1))));
+		}
+
+		String user = null, pass = null;
+		boolean valido = false;
+		if (((user = req.getParameter("usuario")) != null)
+				&& ((pass = req.getParameter("pass")) != null)) {
+			if (user != a && cookieNveces.getValue()) {
+				AuthService as = new AuthService();
+				HttpSession sesion = null;
+				valido = as.autenticarUsuario(user, pass);
+				if (valido) {
+					if (null == (sesion = req.getSession(false))) {
+						sesion = req.getSession();
+					}
+				}
+			}
+		}
+	}
+}

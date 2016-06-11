@@ -1,0 +1,31 @@
+package view;
+
+
+
+import model.dtos.Employee;
+import model.dtos.Employees;
+import model.persistencia.dao.hibernate.EmpHiberDAO;
+import model.persistencia.dao.jdbc.EmpJDBCDAO;
+import model.persistencia.dao.jpa.EmpJPADAO;
+import model.persistencia.interfaces.Recuperable;
+import model.services.EmpleadoService;
+
+public class Main {
+	public static void main(String[] args) {
+		 Recuperable hibernate = new EmpHiberDAO();
+		 Recuperable jdbc = new EmpJDBCDAO();
+		 Recuperable jpa = new EmpJPADAO();
+		 EmpleadoService epshiber = new EmpleadoService(hibernate);
+		 EmpleadoService epsjpa = new EmpleadoService(jpa);
+		 EmpleadoService epsjdbc = new EmpleadoService(jdbc);
+		 Employees empHiber = (Employees)epshiber.getEmployee(100);
+		 System.out.println(empHiber.getFirstName());
+		 Employee empJdbc = (Employee)epsjdbc.getEmployee(100);
+		 System.out.println(empJdbc.getFirstName());
+		 Employee empJpa = (Employee)epsjpa.getEmployee(100);
+		 System.out.println(empJpa.getFirstName());
+
+		
+
+	}
+}

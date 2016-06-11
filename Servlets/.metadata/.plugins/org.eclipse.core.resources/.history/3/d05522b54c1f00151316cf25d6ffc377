@@ -1,0 +1,77 @@
+package view;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jdom2.Attribute;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+
+import model.dtos.Employee;
+import model.dtos.Employees;
+import model.persistencia.dao.hibernate.EmpHiberDAO;
+import model.persistencia.dao.jdbc.EmpJDBCDAO;
+import model.persistencia.dao.jpa.EmpJPADAO;
+import model.persistencia.interfaces.Recuperable;
+import model.services.EmpleadoService;
+
+public class Main {
+	public static void main(String[] args) {
+		// Recuperable hibernate = new EmpHiberDAO();
+		// Recuperable jdbc = new EmpJDBCDAO();
+		// Recuperable jpa = new EmpJPADAO();
+		// EmpleadoService epshiber = new EmpleadoService(hibernate);
+		// EmpleadoService epsjpa = new EmpleadoService(jpa);
+		// EmpleadoService epsjdbc = new EmpleadoService(jdbc);
+		// Employees empHiber = (Employees)epshiber.getEmployee(100);
+		// System.out.println(empHiber.getFirstName());
+		// Employee empJdbc = (Employee)epsjdbc.getEmployee(100);
+		// System.out.println(empJdbc.getFirstName());
+		// Employee empJpa = (Employee)epsjpa.getEmployee(100);
+		// System.out.println(empJpa.getFirstName());
+
+		List<String> elementosOutput = new ArrayList<String>();
+		SAXBuilder builder = new SAXBuilder();
+		Document document = null;
+		// List<Attribute> at = null;
+		try {
+			document = builder.build(new FileInputStream(
+					"C:\\Users\\Administrador\\Desktop\\libros.xml"));
+			Element elementoRaiz = document.getRootElement();
+			List<Element> elementos = elementoRaiz.getChildren();
+			Iterator<Element> elementosIterator = elementos.iterator();
+			List<Attribute> attributes = null;
+			List<Element> hijos = null;
+			Iterator<Attribute> itAttributes = null;
+			while (elementosIterator.hasNext()) {
+				Element e = elementosIterator.next();
+				System.out.println(e.getName());
+				if (e.hasAttributes()) {
+					System.out.println("Atributos:");
+					attributes = e.getAttributes();
+					itAttributes = attributes.iterator();
+					while (itAttributes.hasNext()) {
+						Attribute a = itAttributes.next();
+						System.out.println("   -" + a.getName());
+						System.out.println("   -" + a.getValue());
+					}
+				}
+				hijos = e.getChildren();
+				int i = 0;
+				while (hijos.size() > 0) {
+					System.out.println("     --** " + hijos.get(i).getName());
+					System.out.println("     --** " + hijos.get(i).getValue());
+					i++;
+				}
+			}
+		} catch (JDOMException | IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+}

@@ -1,0 +1,151 @@
+package model.helper;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jdom2.Attribute;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+
+
+public class OperacionesConXML {
+	
+	private String url;
+	
+	public OperacionesConXML(String url) {
+		this.url = url; 
+	}
+	public List<String> contarElementosRemoto() {
+		URL url = null;
+		int nElementos = 0;
+		List<Element> elementos = null;
+		// Creamos el parser encargado de interpretar el XML
+		SAXBuilder builder = new SAXBuilder();
+		// Generamos el arbol DOM del XML utilizando el parser
+		Document document = null;
+		try {
+			url = new URL(this.url);
+			document = builder.build(url);
+			Element elementoRaiz = document.getRootElement();
+			elementos = elementoRaiz.getChildren();
+			if (elementos.size() > 0) {
+				nElementos = elementos.size() + 1;
+			}
+		} catch (JDOMException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nElementos;
+	}
+	
+	public String obtenerElementosLocal() {
+		List<String> elementosOutput = new ArrayList<String>();
+		SAXBuilder builder = new SAXBuilder();
+		Document document = null;
+		// List<Attribute> at = null;
+		try {
+			document = builder.build(new FileInputStream(
+					"C:\\Users\\Administrador\\Desktop\\libros.xml"));
+			Element elementoRaiz = document.getRootElement();
+			List<Element> elementos = elementoRaiz.getChildren();
+			Iterator<Element> elementosIterator = elementos.iterator();
+			List<Attribute> attributes = null;
+			List<Element> hijos = null;
+			while (elementosIterator.hasNext()) {
+				Element e = elementosIterator.next();
+				System.out.println(e.getName());
+				if (e.hasAttributes()) {
+					System.out.println("Atributos:");
+					attributes = e.getAttributes();
+					Iterator<Attribute> itAttributes = attributes.iterator();
+					while (itAttributes.hasNext()) {
+						Attribute a = itAttributes.next();
+						System.out.println("   -" + a.getName());
+						System.out.println("   -" + a.getValue());
+					}
+				}
+				hijos = e.getChildren();
+				int i = 0;
+				while ((i < hijos.size()) && (hijos.size() > 0)) {
+					Element eChild = hijos.get(i);
+					if (eChild.hasAttributes()) {
+						System.out.println("Atributos:");
+						attributes = eChild.getAttributes();
+						Iterator<Attribute> itAttributes = attributes
+								.iterator();
+						while (itAttributes.hasNext()) {
+							Attribute a = itAttributes.next();
+							System.out.println("   -" + a.getName() + "->>>");
+							System.out.println("   -" + a.getValue());
+						}
+					}
+					System.out.println("     --** " + eChild.getName() + "?");
+					System.out.println("     --** " + eChild.getValue() + "-");
+					i++;
+				}
+			}
+		} catch (JDOMException | IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	public String obtenerTotalElementosLocal() {
+		List<String> elementosOutput = new ArrayList<String>();
+		SAXBuilder builder = new SAXBuilder();
+		Document document = null;
+		// List<Attribute> at = null;
+		try {
+			document = builder.build(new FileInputStream(
+					"C:\\Users\\Administrador\\Desktop\\libros.xml"));
+			Element elementoRaiz = document.getRootElement();
+			List<Element> elementos = elementoRaiz.getChildren();
+			Iterator<Element> elementosIterator = elementos.iterator();
+			List<Attribute> attributes = null;
+			List<Element> hijos = null;
+			while (elementosIterator.hasNext()) {
+				Element e = elementosIterator.next();
+				System.out.println(e.getName());
+				if (e.hasAttributes()) {
+					System.out.println("Atributos:");
+					attributes = e.getAttributes();
+					Iterator<Attribute> itAttributes = attributes.iterator();
+					while (itAttributes.hasNext()) {
+						Attribute a = itAttributes.next();
+						System.out.println("   -" + a.getName());
+						System.out.println("   -" + a.getValue());
+					}
+				}
+				hijos = e.getChildren();
+				int i = 0;
+				while ((i < hijos.size()) && (hijos.size() > 0)) {
+					Element eChild = hijos.get(i);
+					if (eChild.hasAttributes()) {
+						System.out.println("Atributos:");
+						attributes = eChild.getAttributes();
+						Iterator<Attribute> itAttributes = attributes
+								.iterator();
+						while (itAttributes.hasNext()) {
+							Attribute a = itAttributes.next();
+							System.out.println("   -" + a.getName() + "->>>");
+							System.out.println("   -" + a.getValue());
+						}
+					}
+					System.out.println("     --** " + eChild.getName() + "?");
+					System.out.println("     --** " + eChild.getValue() + "-");
+					i++;
+				}
+			}
+		} catch (JDOMException | IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
+}

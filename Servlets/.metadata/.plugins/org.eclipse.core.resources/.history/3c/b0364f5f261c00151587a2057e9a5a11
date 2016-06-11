@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Gestor del perfil HR</title>
+<meta http-equiv="Refresh" content="5,url=/LoginServlet">
+</head>
+<body>
+<div id="errorMessage">
+	<h1>Error al acceder a la página </h1>
+	Debes iniciar sesión para acceder al recurso especificado
+	</div>
+</body>
+</html>

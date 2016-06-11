@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>HSDeckManager</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- Servlets -->
+	<!-- AutenticationServlet -->
+	<servlet>
+		<servlet-name>AutenticationServlet</servlet-name>
+		<servlet-class>controller.AutenticationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AutenticationServlet</servlet-name>
+		<url-pattern>/AutenticationServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Filtros -->
+	<!-- UserAutenticationValidateFilter -->
+	<filter>
+		<filter-name>UserAutenticationValidateFilter</filter-name>
+		<filter-class>filters.UserAutenticationValidateFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UserAutenticationValidateFilter</filter-name>
+		<url-pattern>/AutenticationServlet</url-pattern>
+		<url-pattern>/login.html</url-pattern>
+	</filter-mapping>
+
+	<!-- ValidateUsernameAndPasswordFilter -->
+	<filter>
+		<filter-name>ValidateUsernameAndPasswordFilter</filter-name>
+		<filter-class>filters.ValidateUsernameAndPasswordFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ValidateUsernameAndPasswordFilter</filter-name>
+		<url-pattern>/AutenticationServlet</url-pattern>
+	</filter-mapping>
+
+	<!-- Session parameters -->
+	<session-config>
+		<session-timeout>2</session-timeout>
+	</session-config>
+
+</web-app>

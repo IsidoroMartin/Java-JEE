@@ -1,0 +1,18 @@
+package model;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ErrorHandler extends HttpServlet {
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		Throwable excepcion = (Throwable) req.getAttribute("javax.servlet.error.exception"); Integer codigoHTTP = (Integer) req.getAttribute("javax.servlet.error.status_code"); String nombreServlet = (String) req.getAttribute("javax.servlet.error.servlet_name"); if (null == nombreServlet ){nombreServlet = "Desconocido"; } String uriPedida = (String) req.getAttribute("javax.servlet.error.request_uri"); if (null== uriPedida ){uriPedida = “Desconocida"; } 
+
+		
+	}
+}

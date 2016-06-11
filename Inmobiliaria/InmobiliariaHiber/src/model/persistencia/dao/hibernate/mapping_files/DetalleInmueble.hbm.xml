@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-ago-2015 18:58:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping package="model.persistencia.dao.hibernate.beans">
+    <class name="DetalleInmueble" table="DETALLE_INMUEBLE" optimistic-lock="version">
+        <id name="idDetalleInmueble" type="int">
+            <column name="ID_DETALLE_INMUEBLE" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="inmueble" class="Inmueble" fetch="select">
+            <column name="ID_INMUEBLE" precision="22" scale="0" />
+        </many-to-one>
+        <property name="autor" type="int">
+            <column name="AUTOR" precision="22" scale="0" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="COMENTARIO" length="200" />
+        </property>
+        <set name="fotosDetalleInmuebles" table="FOTOS_DETALLE_INMUEBLE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_DETALLE_INMUEBLE" precision="22" scale="0" />
+            </key>
+            <one-to-many class="FotosDetalleInmueble" />
+        </set>
+    </class>
+</hibernate-mapping>

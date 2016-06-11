@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-ago-2015 18:58:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping package="model.persistencia.dao.hibernate.beans">
+    <class name="Usuarios" table="USUARIOS" optimistic-lock="version">
+        <id name="idUsuario" type="int">
+            <column name="ID_USUARIO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoUsuario" class="TipoUsuario" fetch="select">
+            <column name="TIPO_USUARIO" precision="22" scale="0" />
+        </many-to-one>
+        <property name="dni" type="string">
+            <column name="DNI" length="12" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="20" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="APELLIDO" length="40" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="35" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="20" />
+        </property>
+        <set name="inmueblesForPropietario" table="INMUEBLE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PROPIETARIO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="Inmueble" />
+        </set>
+        <set name="inmueblesForInquilino" table="INMUEBLE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="INQUILINO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="Inmueble" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+package model.services;
+
+import model.persistencia.dao.jdbc.DepJDBCDAO;
+import model.persistencia.dao.jdbc.EmpJDBCDAO;
+
+public class DepartamentosService {
+	private DepJDBCDAO dep = null;
+
+	public DepartamentosService() {
+		dep = new DepJDBCDAO();
+	}
+	public List<> getDepartments(){
+		
+	}
+}

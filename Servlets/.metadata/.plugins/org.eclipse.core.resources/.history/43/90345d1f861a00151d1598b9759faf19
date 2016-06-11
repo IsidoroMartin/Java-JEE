@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href=""WebContent/style.css"">
+</head>
+<body>
+	<form action="AuthServlet" method="POST">
+		<input type="text" name="usuario" placeholder="User" /> <input
+			type="password" name="pass" placeholder="Password" /> <input
+			type="submit" value="Log in">
+	</form>
+</body>
+</html>

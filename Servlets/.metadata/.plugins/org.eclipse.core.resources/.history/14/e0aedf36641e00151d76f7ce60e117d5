@@ -1,0 +1,10 @@
+package model.services;
+
+import model.helper.OperacionesConXML;
+
+public class XMLService {
+	private OperacionesConXML opXML = null;
+	public int contarElementos(String url){
+		
+	}
+}

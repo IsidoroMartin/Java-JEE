@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="login">
+		<h1>Log in</h1>
+		
+		<form action="AuthServlet" method="POST">
+			<input type="text" name="usuario" placeholder="User" /> 
+			<br><input type="password" name="pass" placeholder="Password" /> 
+			<br><input type="submit" value="Log in">
+		</form>
+	</div>
+</body>
+</html>

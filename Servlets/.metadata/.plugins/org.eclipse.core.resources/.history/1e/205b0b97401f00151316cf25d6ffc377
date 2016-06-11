@@ -1,0 +1,16 @@
+package model.services;
+
+import model.helper.OperacionesConXML;
+
+public class XMLService {
+	private OperacionesConXML opXML = null;
+	public XMLService() {
+		opXML = new OperacionesConXML();
+	}
+	public int contarElementosRemoto(String url){
+		return opXML.contarElementosRemoto(url);
+	}
+	public int contarElementosLocal(String url){
+		return opXML.contarElementosLocal(url);
+	}
+}

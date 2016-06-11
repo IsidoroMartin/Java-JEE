@@ -1,0 +1,21 @@
+package model.services;
+
+import model.persistencia.dao.jdbc.AuthDAO;
+
+
+
+public class AuthService {
+
+	private AuthDAO dao = null;
+
+	public AuthService() {
+		dao = new AuthDAO();
+	}
+
+	public boolean autenticarUsuario(String user, String pass) {
+		
+		
+		return dao.autenticarUsuario(user, pass);
+
+	}
+}

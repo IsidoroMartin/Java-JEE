@@ -1,0 +1,104 @@
+package model.persistencia.dao.jdbc;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+import config.ConfigFiles;
+
+public class GestorBBDD {
+	private Connection conn = null;
+	private static String host = null;
+	private static String driver = null;
+	private static String user = null;
+	private static String pass = null;
+
+	static {
+		cargarProperties();
+		
+	}
+	public static void cargarProperties(){
+		Properties config = new Properties();
+		try {
+			config.load(new FileInputStream(ConfigFiles.DBJDBCPROPERTIES));
+			host = config.getProperty("HOST");
+			System.out.println(host);
+			user = config.getProperty("USER");
+			pass = config.getProperty("PASSWORD");
+			driver = config.getProperty("DRIVER");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void establecerConn() {
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(host,user,pass);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void closeConn(Statement st) {
+		try {
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (this.conn != null) {
+			try {
+				this.conn.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * Método que cierra la conexión Uso este método para cerrar las conexiones
+	 * que requieren de un ResultSet
+	 * 
+	 * @param st Statement
+	 */
+	public void closeConn(Statement st, ResultSet rs) {
+		closeConn(st);
+		if (st != null) {
+			try {
+				st.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public Connection getConn() {
+		return conn;
+	}
+
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
+	
+	
+}

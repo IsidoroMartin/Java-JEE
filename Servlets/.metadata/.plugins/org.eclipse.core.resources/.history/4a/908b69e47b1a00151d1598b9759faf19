@@ -1,0 +1,21 @@
+package model.services;
+
+import model.dao.AuthDAO;
+
+public class AuthService {
+
+	private AuthDAO dao = null;
+
+	public AuthDAO() {
+		dao = new AuthDAO();
+	}
+	
+
+	
+
+
+	public boolean autenticarUsuario(String user, String pass) {
+		return false;
+
+	}
+}

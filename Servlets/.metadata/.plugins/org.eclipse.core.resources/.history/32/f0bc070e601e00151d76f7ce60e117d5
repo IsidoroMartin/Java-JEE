@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>XML Element count</title>
+</head>
+<body>
+	<form action="" method="get">
+		<input type="text" placeholder="Introduce la url del xml" name="url"/>
+	</form>
+</body>
+</html>

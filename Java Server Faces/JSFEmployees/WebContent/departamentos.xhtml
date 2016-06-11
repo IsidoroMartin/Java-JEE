@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<!-- xmlns:c="http://java.sun.com/jsp/jstl/core" -->
+
+<h:head>
+	<title>Java Server Faces 2.2</title>
+</h:head>
+<h:body>
+	<h3>Bienvenido</h3>
+	<h:form>
+		<h:selectOneMenu label="Departamentos"
+			value="#{jsfEmployeesPorDepartamento.departamento}">
+			<f:selectItems value="#{jsfDepartmentsBean.departamentos}"
+				id="departamentos" var="departamento"
+				itemValue="#{departamento.departmentId}"
+				itemLabel="#{departamento.departmentName}" />
+		</h:selectOneMenu>
+		<h:commandButton value="Obtener Empleados"
+			action="#{jsfEmployeesPorDepartamento.cargarEmpleados}" />
+	</h:form>
+</h:body>
+</html>
+
+<!-- 	<c:forEach items="#{jsfDepartmentsBean.departamentos}" var="departamento"> -->
+<!-- 		<h:outputText value="#{departamento}"></h:outputText> -->
+<!-- 	</c:forEach> -->
+
+<!-- <h:form> -->
+<!-- 	 <h:outputLabel value="Seleccione una persona" for="departamentos"/> -->
+<!-- 		<h:selectOneMenu label="Departamentos"> -->
+<!-- 			<f:selectItems value="#{jsfDepartmentsBean.departamentos}" id="departamentos" -->
+<!-- 				var="departamento" itemValue="#{departamento.departmentId}" -->
+<!-- 				itemLabel="#{departamento.departmentName}" /> -->
+<!-- 		</h:selectOneMenu> -->
+<!-- 		<h:commandButton value="Obtener Empleados" -->
+<!-- 			action="mostrarEmpleadosPorDepartamento"></h:commandButton> -->
+<!-- 	</h:form> -->

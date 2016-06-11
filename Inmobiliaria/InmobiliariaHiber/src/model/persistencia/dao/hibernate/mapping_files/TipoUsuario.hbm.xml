@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-ago-2015 18:58:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping package="model.persistencia.dao.hibernate.beans">
+    <class name="TipoUsuario" table="TIPO_USUARIO" optimistic-lock="version">
+        <id name="idTipoUsuario" type="int">
+            <column name="ID_TIPO_USUARIO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descTipoUsuario" type="string">
+            <column name="DESC_TIPO_USUARIO" length="20" />
+        </property>
+        <set name="usuarioses" table="USUARIOS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TIPO_USUARIO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="Usuarios" />
+        </set>
+    </class>
+</hibernate-mapping>

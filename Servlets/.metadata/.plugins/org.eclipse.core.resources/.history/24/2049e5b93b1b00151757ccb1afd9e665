@@ -1,0 +1,23 @@
+package listeners;
+
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class SessionListener implements HttpSessionListener {
+	private Logger log = LogManager.getRootLogger();
+
+	@Override
+	public void sessionCreated(HttpSessionEvent session) {
+		log.trace("Se ha generado la session con el ID: "
+				+ session.getSession().getId());
+	}
+
+	@Override
+	public void sessionDestroyed(HttpSessionEvent arg0) {
+
+	}
+
+}

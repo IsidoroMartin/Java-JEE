@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-ago-2015 18:58:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping package="model.persistencia.dao.hibernate.beans">
+    <class name="Inmueble" table="INMUEBLE" optimistic-lock="version">
+        <id name="idInmueble" type="int">
+            <column name="ID_INMUEBLE" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="estado" class="Estado" fetch="select">
+            <column name="ESTADO" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByPropietario" class="Usuarios" fetch="select">
+            <column name="PROPIETARIO" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByInquilino" class="Usuarios" fetch="select">
+            <column name="INQUILINO" precision="22" scale="0" />
+        </many-to-one>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="120" />
+        </property>
+        <property name="ciudad" type="string">
+            <column name="CIUDAD" length="20" />
+        </property>
+        <property name="codPostal" type="string">
+            <column name="COD_POSTAL" length="6" />
+        </property>
+        <property name="metros" type="int">
+            <column name="METROS" precision="22" scale="0" />
+        </property>
+        <set name="fotosInmuebles" table="FOTOS_INMUEBLE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_INMUEBLE" precision="22" scale="0" />
+            </key>
+            <one-to-many class="FotosInmueble" />
+        </set>
+        <set name="detalleInmuebles" table="DETALLE_INMUEBLE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_INMUEBLE" precision="22" scale="0" />
+            </key>
+            <one-to-many class="DetalleInmueble" />
+        </set>
+    </class>
+</hibernate-mapping>

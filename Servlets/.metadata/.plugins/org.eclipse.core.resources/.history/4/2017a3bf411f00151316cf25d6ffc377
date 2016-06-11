@@ -1,0 +1,6 @@
+package paginas;
+
+public class Paginas {
+	public static final String PREBODY="<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>XML Element count</title><link rel=\"stylesheet\" type=\"text/css\" href=\"Style.css\"></head><body><div id='contenedor'>";
+	public static final String POSTBODY="<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>XML Element count</title><link rel=\"stylesheet\" type=\"text/css\" href=\"Style.css\"></head><body><div id='contenedor'>";
+}

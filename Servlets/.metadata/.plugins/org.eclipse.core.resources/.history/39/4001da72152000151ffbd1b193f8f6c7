@@ -1,0 +1,39 @@
+package model;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class ErrorHandler extends HttpServlet {
+	private Logger log = LogManager.getRootLogger();
+
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		Throwable ex = (Throwable) req
+				.getAttribute("javax.servlet.error.exception");
+		String nombreServlet = (String) req
+				.getAttribute("javax.servlet.error.servlet_name");
+		if (null == nombreServlet) {
+			nombreServlet = "Desconocido";
+		}
+		Integer codigoHTTP = (Integer) req.getAttribute("javax.servlet.error.status_code"); 
+		String uriPedida = (String) req
+				.getAttribute("javax.servlet.error.request_uri");
+		if (null == uriPedida) {
+			uriPedida = "Desconocida";
+		}
+		String cadena = "Ha ocurrido un error durante la ejecucion del programa : \n Excepcion: " +"|"+codigoHTTP
+				+ " | El usuario  intentaba acceder al servlet: "
+				+ nombreServlet + "\n URI: " + uriPedida;
+		log.error(cadena);
+		resp.sendRedirect("Error.html");
+
+	}
+}

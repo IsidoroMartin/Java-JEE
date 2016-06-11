@@ -1,0 +1,36 @@
+package view;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class LoginServlet extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String web = "<!DOCTYPE html>"
+				+ "<html>"
+				+ "<head>"
+				+ "<meta charset='UTF-8'>"
+				+ "<title>Insert title here</title>"
+				+ "<link rel='stylesheet' type='text/css' href='style.css'>"
+				+ "</head>"
+				+ "<body>"
+				+ "<div id='login'>	"
+				+ "	<form action='AuthServlet' method='POST'>"
+				+ "			<label>"
+				+ "<h1>Log in</h1>"
+				+ "</label>"
+				+ "	<input type='text' name='usuario' placeholder='User' />"
+				+ "	<br><input type='password' name='pass' placeholder='Password' />"
+				+ "	<br><input type='submit' value='Log in'>" + "		</form>	"
+				+ "</div>" + "</body>" + "</html>";
+		PrintWriter pw = resp.getWriter();
+		pw.write(web);
+	}
+}

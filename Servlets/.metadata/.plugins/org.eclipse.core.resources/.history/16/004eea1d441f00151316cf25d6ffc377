@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>XML Element count</title>
+<link rel="stylesheet" type="text/css" href="Style.css">
+</head>
+<body>
+	<div id="form">
+		<form action="ContarElementosXMLServlet" method="get">
+			<input type="text" placeholder="Introduce la url del xml" class="text" name="url" /> 
+				</br>
+				 <a href="#"></a><input type="submit" value="Contar Elementos" class="button"></a>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+package model;
+
+import java.io.Serializable;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
+public class CookiesHandler extends Cookie implements Serializable {
+
+	public CookiesHandler(String arg0, String arg1) {
+		super(arg0, arg1);
+	}
+
+	public static Cookie getCookie(String cookieName , Cookie[] cookies){
+		Cookie cookie = null;
+		int i =0;
+		do{
+				if(cookies[i].getName().equals(cookieName)){
+					cookie = cookies[i];
+				}
+				i++;
+			}while((cookie==null) && (i<cookies.length));
+			
+			return cookie;
+	}
+}

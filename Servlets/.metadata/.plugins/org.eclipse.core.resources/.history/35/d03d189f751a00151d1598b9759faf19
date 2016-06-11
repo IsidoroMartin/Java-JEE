@@ -1,0 +1,54 @@
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.dtos.Employee;
+import model.dtos.Employees;
+import model.persistencia.dao.hibernate.EmpHiberDAO;
+import model.persistencia.dao.jdbc.EmpJDBCDAO;
+import model.persistencia.dao.jpa.EmpJPADAO;
+import model.persistencia.interfaces.Recuperable;
+import model.services.EmpleadoService;
+
+/**
+ * Servlet implementation class EmployeesServlet
+ */
+
+public class EmployeesServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Recuperable hibernate = new EmpHiberDAO();
+		Recuperable jdbc = new EmpJDBCDAO();
+//		Recuperable jpa = new EmpJPADAO();
+		EmpleadoService epshiber = new EmpleadoService(hibernate);
+//		EmpleadoService epsjpa = new EmpleadoService(jpa);
+		EmpleadoService epsjdbc = new EmpleadoService(jdbc);
+		Employees empHiber = (Employees)epshiber.getEmployee(100);
+		System.out.println(empHiber.getFirstName());
+		System.out.println();
+		Employee empJdbc = (Employee)epsjdbc.getEmployee(100);
+		System.out.println(empJdbc.getFirstName()+"***************************");
+		System.out.println("-----------------------------------------------");
+//		Employee empJpa = (Employee)epsjpa.getEmployee(100);
+//		System.out.println(empJpa.getFirstName());
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
+	@Override
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1)
+			throws ServletException, IOException {
+		super.service(arg0, arg1);
+		
+	}
+
+}

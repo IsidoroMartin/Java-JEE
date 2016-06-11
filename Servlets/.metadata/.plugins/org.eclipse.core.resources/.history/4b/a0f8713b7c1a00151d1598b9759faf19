@@ -1,0 +1,38 @@
+package persistencia.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import persistencia.dtos.Employee;
+
+public class EmployeeDAO {
+	Pool gbbdd = null;
+
+	public EmployeeDAO() {
+		gbbdd = Pool.getInstance();
+	}
+
+	public Employee getEmployee(int id) {
+		Connection conn = null;
+		Employee e = null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			conn = gbbdd.getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery("Select * from Employees where Employee_id="
+					+ id);
+			if (rs.next()) {
+				e = new Employee(rs.getLong("Employee_id"),
+						rs.getString("email"), rs.getString("first_name"),
+						rs.getString("last_name"), rs.getBigDecimal("salary"));
+			}
+		} catch (Exception ex) {
+
+		} finally {
+			gbbdd.liberarRecursos(conn, st);
+		}
+		return e;
+	}
+}

@@ -1,0 +1,64 @@
+package servlets;
+
+import java.io.IOException;
+
+import static paginas.Paginas.*;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.services.XMLService;
+
+public class ContarElementosXMLServlet extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String url = null;
+		int nElementos = -1;
+		resp.setContentType("text/html");
+		resp.getWriter()
+				.println(PREBODY);
+		if (null != (url = req.getParameter("url"))) {
+			url = url.trim();
+			if (url.length() > 0) {
+				if ((!url.substring(0, 5).equals("https"))
+						&& (url.substring(url.length() - 4).equals(".xml"))) {
+					XMLService xmlService = new XMLService(url);
+					if (url.substring(0, 4).equals("http")) {
+						nElementos = xmlService.contarElementosRemoto();
+					} else if (url.contains(":\\")) {
+						nElementos = xmlService.contarElementosLocal();
+					} else {
+						resp.getWriter().println(
+								"Debe introducir una url local o remota");
+					}
+					if (nElementos > 0) {
+						System.out.println(url);
+						resp.getWriter().println(
+								"Hay " + nElementos + " Elementos");
+					}else if (nElementos==0){
+						resp.getWriter().println(
+								"El fichero no tiene elementos");
+					}
+				} else {
+					resp.getWriter()
+							.println(
+									"El fichero xml introducido no es válido, por favor introduzca una direccion válida");
+				}
+			} else {
+				resp.getWriter().println("Debe introducir una url");
+			}
+
+		}
+		resp.getWriter().println(POSTBODY);
+	}
+	private Cookie obtenerCookie(HttpServletRequest req, String clave) {
+		Cookie[] cookies = req.getCookies();
+		
+		return null;
+		
+	}
+}

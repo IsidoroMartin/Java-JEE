@@ -1,0 +1,40 @@
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.services.XMLService;
+
+public class ContarElementosXMLServlet extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String url = null;
+		int nElementos = 0;
+		if (null != (url = req.getParameter("url"))) {
+			url = url.trim();
+//			 if(url.charAt(3)!='s'){
+				 XMLService xmlService = new XMLService();
+					if (url.substring(0, 3).equals("http")){
+						nElementos = xmlService.contarElementosRemoto(url);
+//					}else{
+						nElementos = xmlService.contarElementosLocal(url);
+//					}
+					
+					System.out.println(url);
+					resp.getWriter().println("Hay " +nElementos+" Elementos");	 
+//			 }else{
+//				 resp.getWriter().println("El fichero xml introducido no es válido, por favor introduzca una direccion válida");
+//			 }
+			
+			
+			
+			
+		}
+
+	}
+}
